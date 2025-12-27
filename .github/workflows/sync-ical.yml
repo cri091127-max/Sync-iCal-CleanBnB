@@ -1,0 +1,15 @@
+# Sync-iCal-CleanBnB
+name: Sync iCal CleanBnB
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Toutes les 5 minutes
+  workflow_dispatch:  # Permet de lancer manuellement
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call iCal Sync
+        run: |
+          curl -X GET "https://clean-bn-b-pro-525fb099.base44.app/api/functions/fullICalSync?token=${{ secrets.AUTO_SYNC_TOKEN }}"
